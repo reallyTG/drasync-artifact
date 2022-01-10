@@ -31,6 +31,9 @@ RUN mkdir /home/evaluation
 # Set working directory above sources and tests.
 WORKDIR /home
 
+# Expose port 8080 for the visualization.
+EXPOSE 8080
+
 # Misc. setup
 RUN git config --global http.sslVerify "false"
 RUN npm config set strict-ssl false
