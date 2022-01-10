@@ -7,14 +7,26 @@ RUN apt-get update \
 
 RUN apt update
 
-# Create directories to store source code.
-RUN mkdir -p /home/drasync/analysis
-RUN mkdir -p /home/drasync/vis
+# Create and move to source code directory.
+RUN mkdir -p /home/drasync
+WORKDIR /home/drasync/
+
+# Fetch source code for the visualization.
+RUN git clone https://github.com/reallyTG/p5-promise-viz.git
+
+# Fetch source code for analysis output processing.
+RUN git clone https://github.com/reallyTG/ProfilingPromisesProcessing.git
+
+# Fetch source code for analysis.
+RUN git clone https://github.com/reallyTG/ProfilingPromisesAnalysis.git
+
+# Fetch code for anti-pattern detection queries.
+RUN git clone https://github.com/reallyTG/ProfilingPromisesQueries.git
 
 # Create directories related to the evaluation.
-RUN mkdir -p /home/evaluation
+RUN mkdir /home/evaluation
 
-# COPY . /home/npm-filter
+# TODO: fetch all of the evaluation candidates.
 
 # Set working directory above sources and tests.
 WORKDIR /home
