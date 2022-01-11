@@ -3,7 +3,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # Fetch prerequisites.
 RUN apt-get update \
-	&& apt-get -y install --no-install-recommends git unzip vim curl nodejs npm
+	&& apt-get -y install --no-install-recommends git unzip vim curl nodejs npm parallel
 
 RUN apt update
 
