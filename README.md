@@ -3,7 +3,28 @@
 Update `git clone ...` in Dockerfile when submitting to reflect the exact commit to grab.
 
 # drasync-artifact
+
 Artifact for DrAsync, a tool to detect and visualize anti-patterns related to programming with JavaScript's async features.
+
+# Artifact Directory Structure
+
+/home
+--> /drasync
+----> /ProfilingPromisesAnalysis
+----> /ProfilingPromisesProcessing
+----> /ProfilingPromisesQueries
+----> /p5-promise-vis
+--> /evaluation
+----> /drasync-artifact-scripts
+----> /case-studies
+------> /<one-dir-for-each-project-in-evaluation>
+----> /query-results
+----> /processed-query-results
+----> /collected-anti-patterns
+----> /collected-results
+----> /QLDBs
+----> /processed-results
+----> /proj-stats
 
 # Instructions
 
@@ -14,4 +35,8 @@ Artifact for DrAsync, a tool to detect and visualize anti-patterns related to pr
 
 # TODO
 
-Figure out, in docker run step, which port is on the local machine. Specify that users can map to that port.
+- figure out, in docker run step, which port is on the local machine. Specify that users can map to that port.
+  
+- install CodeQL on the image.
+  
+- make sure stats query is where it needs to be.
