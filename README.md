@@ -40,3 +40,5 @@ Artifact for DrAsync, a tool to detect and visualize anti-patterns related to pr
 - install CodeQL on the image.
   
 - make sure stats query is where it needs to be.
+  
+- add directory structure to Dockerfile.
