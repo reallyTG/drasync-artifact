@@ -8,6 +8,7 @@ Artifact for DrAsync, a tool to detect and visualize anti-patterns related to pr
 
 # Artifact Directory Structure
 
+```
 /home
 --> /drasync
 ----> /ProfilingPromisesAnalysis
@@ -25,6 +26,7 @@ Artifact for DrAsync, a tool to detect and visualize anti-patterns related to pr
 ----> /QLDBs
 ----> /processed-results
 ----> /proj-stats
+```
 
 # Instructions
 
