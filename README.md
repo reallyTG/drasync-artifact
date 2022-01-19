@@ -82,7 +82,13 @@ cd /home/drasync/p5-promise-vis
 python3 -m http.server 8080
 ```
 
+TODO: The vis needs to be more usable. Unclear how we get it to load a file ATM.
+
 ### Case Study
+
+The various case snippets shown in the case study can be found at the following locations:
+
+
 
 ## Running the Evaluation
 
