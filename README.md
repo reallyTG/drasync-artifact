@@ -84,7 +84,17 @@ python3 -m http.server 8080
 
 TODO: The vis needs to be more usable. Unclear how we get it to load a file ATM.
 
-### Case Study
+### Code Locations of Code Snippets in Paper
+
+Below, find the real code locations in the artifact corresponding to code snippets highlighted in the paper.
+This subsection is organized according to sections in the paper.
+
+#### Motivating Examples
+
+- [lines 279-286] ~ `vim +189 /home/evaluation/case-studies/ui5-builder/lib/lbt/resources/ResourcePool.js`
+- [lines 333-339] ~ `vim +83 /home/evaluation/case-studies/appcenter-cli/src/util/misc/promisfied-fs.ts`
+
+#### Case Study
 
 The various case snippets shown in the case study can be found at the following locations:
 
@@ -94,6 +104,10 @@ The various case snippets shown in the case study can be found at the following 
 - [lines 739-742] ~ `vim +467 /home/evaluation/case-studies/eleventy/src/Engines/Nunjucks.js`
 - [lines 804-808] ~ `vim +428 /home/evaluation/case-studies/netlify-cms/packages/netlify-cms-core/src/backend.ts`
 
+#### RQ3 Code Snippets
+
+- [lines 892-894] ~ `vim +37 /home/evaluation/case-studies/vuepress/packages/@vuepress/core/lib/node/plugin-api/override/EnhanceAppFilesOption.js`
+- [lines 903-908] ~ `vim +198 /home/evaluation/case-studies/strapi/packages/strapi-admin/services/permission/engine.js `
 
 ## Running the Evaluation
 
