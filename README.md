@@ -22,22 +22,9 @@ The following command will launch the DrAsync Docker container, and give you a b
 docker run -t -i -p 8080:8080 drasync
 ```
 
-# Correspondence to the Paper 
+**NOTE**: in case port 8080 is taken on your local machine, the anatomy of the command is `docker run -t -i -p <port on machine>:<port in docker> drasync`.
+When running the visualization from inside docker, you should use `python3 -m http.server <port in docker>`, and you can then access the visualization at `localhost:<port on machine>`. 
 
-This artifact contains all of the source code for our tool, as well as clones of the projects we used in our evaluation at the specific commits we used to perform the evaluation. 
-
-The code corresponding to the anti-patterns described in Fig. 3 of the paper can be found in `/home/drasync/ProfilingPromisesQueries/`.
-The files corresponding to each anti-pattern are:
-```
-findAsyncFunctionNoAwait.ql     ~ asyncFunctionNoAwait
-findAwaitReturnInAsync.ql       ~ asyncFunctionAwaitedReturn
-findAwaitInLoop.ql              ~ loopOverArrayWithAwait
-findPromiseResolveThen.ql       ~ promiseResolveThen
-findSyncResolve.ql              ~ executorOneArgUsed
-findReactionReturningPromise.ql ~ reactionReturnsPromise
-findInHousePromisification.ql   ~ customPromisification
-findExplicitConstructor.ql      ~ explicitPromiseConstructor
-```
 
 # Artifact Directory Structure
 
@@ -61,11 +48,51 @@ findExplicitConstructor.ql      ~ explicitPromiseConstructor
 ----> /proj-stats
 ```
 
-# Instructions
+# Kick-the-Tires, or How to Make Sure the Artifact is Up and Running
+
+# Correspondence Between Paper and Artifact
+
+This artifact contains all of the source code for our tool, clones of the projects we used in our evaluation at the specific commits we used to perform the evaluation, and all infrastructure required to run our evaluation.
+We will first spell out explicit correspondence between relevant figures and snippets in the paper to their equivalents in the artifact, and then we will describe how to run our evaluation in full.
+
+## Mapping the Paper to the Artifact
+
+
+### Queries
+
+The code corresponding to the anti-patterns described in Fig. 3 of the paper can be found in `/home/drasync/ProfilingPromisesQueries/`.
+The files corresponding to each anti-pattern are:
+```
+findAsyncFunctionNoAwait.ql     ~ asyncFunctionNoAwait
+findAwaitReturnInAsync.ql       ~ asyncFunctionAwaitedReturn
+findAwaitInLoop.ql              ~ loopOverArrayWithAwait
+findPromiseResolveThen.ql       ~ promiseResolveThen
+findSyncResolve.ql              ~ executorOneArgUsed
+findReactionReturningPromise.ql ~ reactionReturnsPromise
+findInHousePromisification.ql   ~ customPromisification
+findExplicitConstructor.ql      ~ explicitPromiseConstructor
+```
+
+### Interactive Visualization
+
+The visualization can be run with the following command:
+
+```
+cd /home/drasync/p5-promise-vis
+python3 -m http.server 8080
+```
+
+### Case Study
+
+## Running the Evaluation
+
+TODO
+
+# More Instructions?
 
 1. Build image.
 2. Run image: `docker run -t -i -p 8080:8080 drasync`
-3. Run the vis in the container: `ls /drasync/p5-promise-vis; python3 -m http.server 8080`
+3. Run the vis in the container: `cd /drasync/p5-promise-vis; python3 -m http.server 8080`
 4. Access vis: navigate to localhost:8080 on your machine!
 
 # TODO
