@@ -6,6 +6,22 @@ Update `git clone ...` in Dockerfile when submitting to reflect the exact commit
 
 Artifact for DrAsync, a tool to detect and visualize anti-patterns related to programming with JavaScript's async features.
 
+# Building the Image Locally
+
+```
+git clone <this repo>
+cd drasync-artifact
+docker build -t drasync .
+```
+
+# Running the Image
+
+The following command will launch the DrAsync Docker container, and give you a bash CLI.
+
+```
+docker run -t -i -p 8080:8080 drasync
+```
+
 # Artifact Directory Structure
 
 ```
