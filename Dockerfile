@@ -92,4 +92,5 @@ RUN git config --global http.sslVerify "false"
 RUN npm config set strict-ssl false
 
 # Run the script to download and build CodeQL.
+COPY setupCodeQL.sh /home
 RUN ./setupCodeQL.sh
