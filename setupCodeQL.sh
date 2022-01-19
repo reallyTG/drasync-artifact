@@ -16,4 +16,8 @@ git clone https://github.com/github/codeql.git --branch v1.26.0 codeql-repo
 # Set up the path.
 echo "export PATH=/home/codeql_home/codeql:$PATH" >> /root/.bashrc
 
+# Remove this.
+cd /home
+rm setupCodeQL.sh
+
 # Done!
