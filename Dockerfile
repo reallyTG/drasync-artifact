@@ -90,3 +90,6 @@ WORKDIR /home
 # Misc. setup
 RUN git config --global http.sslVerify "false"
 RUN npm config set strict-ssl false
+
+# Run the script to download and build CodeQL.
+RUN ./buildCodeQL.sh
