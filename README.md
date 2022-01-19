@@ -22,6 +22,23 @@ The following command will launch the DrAsync Docker container, and give you a b
 docker run -t -i -p 8080:8080 drasync
 ```
 
+# Correspondence to the Paper 
+
+This artifact contains all of the source code for our tool, as well as clones of the projects we used in our evaluation at the specific commits we used to perform the evaluation. 
+
+The code corresponding to the anti-patterns described in Fig. 3 of the paper can be found in `/home/drasync/ProfilingPromisesQueries/`.
+The files corresponding to each anti-pattern are:
+```
+findAsyncFunctionNoAwait.ql     ~ asyncFunctionNoAwait
+findAwaitReturnInAsync.ql       ~ asyncFunctionAwaitedReturn
+findAwaitInLoop.ql              ~ loopOverArrayWithAwait
+findPromiseResolveThen.ql       ~ promiseResolveThen
+findSyncResolve.ql              ~ executorOneArgUsed
+findReactionReturningPromise.ql ~ reactionReturnsPromise
+findInHousePromisification.ql   ~ customPromisification
+findExplicitConstructor.ql      ~ explicitPromiseConstructor
+```
+
 # Artifact Directory Structure
 
 ```
