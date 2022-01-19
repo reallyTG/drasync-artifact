@@ -88,6 +88,7 @@ TODO: The vis needs to be more usable. Unclear how we get it to load a file ATM.
 
 Below, find the real code locations in the artifact corresponding to code snippets highlighted in the paper.
 This subsection is organized according to sections in the paper.
+Run the `vim` command in Docker to open the file in an editor at the given line.
 
 #### Motivating Examples
 
