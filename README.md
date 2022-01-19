@@ -1,7 +1,5 @@
 # NOTE
 
-Update `git clone ...` in Dockerfile when submitting to reflect the exact commit to grab.
-
 If you're building this locally, make sure to `chmod 777 setupCodeQL.sh` otherwise Docker can't run it.
 
 # drasync-artifact
@@ -90,6 +88,11 @@ TODO: The vis needs to be more usable. Unclear how we get it to load a file ATM.
 
 The various case snippets shown in the case study can be found at the following locations:
 
+- [lines 672-678] ~ `vim /home/evaluation/case-studies/openapi-typescript-codegen/src/utils/readSpec.ts`
+- [lines 690-692] ~ `vim +159 /home/evaluation/case-studies/eleventy/src/TemplateLayout.js`
+- [lines 729-733] ~ `vim +39 /home/evaluation/case-studies/dash.js/src/streaming/utils/CapabilitiesFilter.js`
+- [lines 739-742] ~ `vim +467 /home/evaluation/case-studies/eleventy/src/Engines/Nunjucks.js`
+- [lines 804-808] ~ `vim +428 /home/evaluation/case-studies/netlify-cms/packages/netlify-cms-core/src/backend.ts`
 
 
 ## Running the Evaluation
