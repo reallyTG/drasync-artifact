@@ -84,7 +84,8 @@ RUN git clone https://github.com/ProfilingPromisesBenchmarks/vuepress.git
 WORKDIR /home
 
 # Expose port 8080 for the visualization.
-EXPOSE 8080
+# I don't think we need this if we run docker as it says to run it in the readme.
+# EXPOSE 8080
 
 # Misc. setup
 RUN git config --global http.sslVerify "false"
