@@ -46,6 +46,7 @@ When running the visualization from inside docker, you should use `python3 -m ht
 ----> /QLDBs
 ----> /processed-results
 ----> /proj-stats
+--> /codeql-home
 ```
 
 # Kick-the-Tires, or How to Make Sure the Artifact is Up and Running
@@ -112,7 +113,45 @@ The various case snippets shown in the case study can be found at the following 
 
 ## Running the Evaluation
 
-TODO
+In this section, we will describe how to run the different components for the evaluation.
+
+Some notes:
+
+1. You are expected to run all scripts from `/home/evaluation/drasync-artifact-scripts`. While not strictly necessary, this is how the scripts were tested.
+
+### Running CodeQL Queries
+
+The paper describes anti-patterns, and we proposed static analyses capable of detecting them.
+More specifically, we proposed various CodeQL static analysis queries that can be run over a code repository to flag anti-pattern instances.
+In order to run these queries, **CodeQL must first build a _database_ of the project under analysis**.
+The docker container is equipped with a script to achieve this.
+
+To run the database build script (there will be a lot of terminal output during this step):
+```
+cd /home/evaluation/drasync-artifact-scripts
+./make-database.sh Boostnote
+```
+
+The database is created in `/home/evaluation/QLDBs` (e.g., in this case, `ls /home/evaluation/QLDBs/Boostnote` contains the CodeQL database).
+Once created, queries can be run over the database.
+
+To run a query, use this script (the terminal will be pretty quiet executing this script):
+```
+cd /home/evaluation/drasync-artifact-scripts
+./run-query.sh Boostnote 
+```
+
+The results are always stored in `/home/evaluation/query-results/<query-name>/<project-name>` (e.g., in this case, `cat /home/evaluation/query-results/findAsyncFunctionNoAwait/Boostnote.csv` will show you the query results).
+
+For this particular combination of query and project, the results of running the aforementioned `cat` command should be:
+
+```
+"col0"
+"pattern10 492 14 494 7 /home/evaluation/case-studies/Boostnote/lib/main-menu.js"
+```
+
+You can ignore the `"col0"` header; the following line can be read as: "pattern10 (aka, the _asyncFunctionNoAwait_ pattern) occurs from lines 492 to 494 and columns 14 to 7 resp. in file `/home/evaluation/case-studies/Boostnote/lib/main-menu.js`.
+To view the pattern in the terminal, run `vim +492 /home/evaluation/case-studies/Boostnote/lib/main-menu.js`.
 
 # More Instructions?
 
