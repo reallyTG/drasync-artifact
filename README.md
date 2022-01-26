@@ -114,6 +114,8 @@ The various case snippets shown in the case study can be found at the following 
 ## Running the Evaluation
 
 In this section, we will describe how to run the different components for the evaluation.
+First, we begin by describing how to run our tool on a particular project.
+Later, we describe how the entire evaluation can be reproduced by calling a few scripts. 
 
 Some notes:
 
@@ -152,6 +154,11 @@ For this particular combination of query and project, the results of running the
 
 You can ignore the `"col0"` header; the following line can be read as: "pattern10 (aka, the _asyncFunctionNoAwait_ pattern) occurs from lines 492 to 494 and columns 14 to 7 resp. in file `/home/evaluation/case-studies/Boostnote/lib/main-menu.js`.
 To view the pattern in the terminal, run `vim +492 /home/evaluation/case-studies/Boostnote/lib/main-menu.js`.
+
+### Running the Dynamic Analysis
+
+An important part of our tool is a dynamic analysis that tracks the lifetimes of promsise objects, written using the [`async_hooks` API](https://nodejs.org/api/async_hooks.html). 
+
 
 # More Instructions?
 
