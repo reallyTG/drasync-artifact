@@ -161,6 +161,34 @@ To view the pattern in the terminal, run `vim +492 /home/evaluation/case-studies
 
 An important part of our tool is a dynamic analysis that tracks the lifetimes of promsise objects, written using the [`async_hooks` API](https://nodejs.org/api/async_hooks.html). 
 
+To run the analysis, the `asyncHooks_require.js` file needs to be required by the code wanting to be analyzed. 
+This can be achieved by `require('./asyncHooks_require.js')` at the top of a JS file (after having moved the analysis over to the directory!), or by invoking node with `--require /home/drasync/ProfilingPromisesAnalysis/asyncHooks_require.js`. 
+For simplicity, we configured the test runners for each of the projects to require our analysis using a variety of configuration options, usually in the `package.json` of the projects.
+For this reason, we ask that you use the `dr-async-artifact` branch of the repos (the repositories in the Docker image should be on the correct branch, but take note nonetheless). 
+
+To run the test suites of each of the projects, simply run the following commands, after installing and building the project:
+
+- appcenter-cli: test: `npm run test`
+- Boostnote: test: `npm run test`
+- browsertime: test: `npm run test:unit`
+- CodeceptJS: test: `npm run test`
+- dash.js: test: `npm run test`
+- eleventy: test: `npm run test`
+- erpjs: test: `npm run test`
+- fastify: test: `npm run unit`
+- flowcrypt-browser: test: `npm run test_buf`, `npm run test_async_stack`, `npm run test_patterns`
+- media-stream-library-js: test: `npm run test`
+- mercurius: test: `npm run unit`
+- netlify-cms: test: `npm run test:unit`
+- openapi-typescript-codegen: test: `npm run test`
+- rmrk-tools: test: `npm run test`
+- stencil: test: `npm run test`
+- strapi: test: `npm run test:unit`
+- treeherder: test: `npm run test`
+- ui5-builder: test: `npm run unit`
+- vscode-js-debug: test: `npm run test:unit`
+- vuepress: (build: `yarn install`, `yarn build`) test: `yarn test`
+
 
 # More Instructions?
 
