@@ -167,7 +167,7 @@ For this reason, we ask that you use the `dr-async-artifact` branch of the repos
 To run the test suites of each of the projects, simply run the following commands, after installing and building the project:
 
 - appcenter-cli: test: `npm run test`
-- Boostnote: test: `npm run test`
+- Boostnote: (build: `yarn install`) test: `npm run test`
 - browsertime: test: `npm run test:unit`
 - CodeceptJS: test: `npm run test`
 - dash.js: test: `npm run test`
@@ -187,6 +187,9 @@ To run the test suites of each of the projects, simply run the following command
 - vscode-js-debug: test: `npm run test:unit`
 - vuepress: (build: `yarn install`, `yarn build`) test: `yarn test`
 
+Some packages have (very few) failing tests, and that's OK. (E.g., Boostnote has one failing test.)
+
+The result of running the test suites is a **set of results-XYZ.json** files, which are collections of promise objects seen; each corresponds to an independent invocation of `node`, and many files simply means that many separate node instances were invoked, e.g., if the test suite is parallelized.
 
 # More Instructions?
 
