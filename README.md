@@ -2,6 +2,8 @@
 
 If you're building this locally, make sure to `chmod 777 setupCodeQL.sh` otherwise Docker can't run it.
 
+TODO: make sure that in docker, the correct branch of the case studies are used
+
 # drasync-artifact
 
 Artifact for DrAsync, a tool to detect and visualize anti-patterns related to programming with JavaScript's async features.
