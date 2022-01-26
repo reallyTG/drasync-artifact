@@ -7,6 +7,8 @@ RUN apt-get update \
 
 RUN apt update
 
+RUN npm i --g yarn
+
 # Create and move to source code directory.
 RUN mkdir -p /home/drasync
 WORKDIR /home/drasync/
