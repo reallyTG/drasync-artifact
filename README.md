@@ -155,6 +155,19 @@ For this particular combination of query and project, the results of running the
 You can ignore the `"col0"` header; the following line can be read as: "pattern10 (aka, the _asyncFunctionNoAwait_ pattern) occurs from lines 492 to 494 and columns 14 to 7 resp. in file `/home/evaluation/case-studies/Boostnote/lib/main-menu.js`.
 To view the pattern in the terminal, run `vim +492 /home/evaluation/case-studies/Boostnote/lib/main-menu.js`.
 
+### Processing Query Results
+
+Once the queries are done running, the results must be processed.
+The script to achieve this can be run by:
+
+```
+cd /home/evaluation/drasync-artifact-scripts
+./consolidate-query-results.sh Boostnote
+```
+
+(The first time you run this for any project, there will be an error in the terminal "rm: cannot remove ..."---this is fine).
+You can see the processed results with `cat /home/evaluation/processed-query-results/Boostnote.csv`, the file simply contains the output of running each of the queries that were run.
+
 ### Running the Dynamic Analysis
 
 An important part of our tool is a dynamic analysis that tracks the lifetimes of promsise objects, written using the [`async_hooks` API](https://nodejs.org/api/async_hooks.html). 
@@ -190,6 +203,26 @@ To run the test suites of each of the projects, simply run the following command
 Some packages have (very few) failing tests, and that's OK. (E.g., Boostnote has one failing test.)
 
 The result of running the test suites is a **set of results-XYZ.json** files, which are collections of promise objects seen; each corresponds to an independent invocation of `node`, and many files simply means that many separate node instances were invoked, e.g., if the test suite is parallelized.
+
+As an example, to run the Boostnote test suite:
+
+```
+cd /home/evaluation/case-studies/Boostnote
+(if you haven't installed the project yet:)
+yarn install
+npm run test
+```
+
+This should yield multiple results-XYZ.json files (you can `ls` in `/home/evaluation/case-studies/Boostnote` to see them).
+
+### Processing Dynamic Analysis Results
+
+Once the results-XYZ.json files have been generated, they must be processed together with the _processed query results_, so make sure you have run that step first.
+The command to process the results of the dynamic analysis is:
+
+```
+TODO
+```
 
 # More Instructions?
 
