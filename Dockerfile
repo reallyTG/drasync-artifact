@@ -56,6 +56,14 @@ RUN git clone https://github.com/reallyTG/drasync-artifact-scripts.git
 RUN mkdir /home/evaluation/query-results
 RUN mkdir /home/evaluation/processed-query-results
 RUN mkdir /home/evaluation/collected-anti-patterns
+RUN mkdir /home/evaluation/collected-anti-patterns/AsyncFunctionNoAwait
+RUN mkdir /home/evaluation/collected-anti-patterns/AwaitedReturnInAsyncFun
+RUN mkdir /home/evaluation/collected-anti-patterns/InHousePromisification
+RUN mkdir /home/evaluation/collected-anti-patterns/PromiseResolveThen
+RUN mkdir /home/evaluation/collected-anti-patterns/AwaitInLoop
+RUN mkdir /home/evaluation/collected-anti-patterns/ExplicitPromiseConstructor
+RUN mkdir /home/evaluation/collected-anti-patterns/PromiseConstructorSyncResolve
+RUN mkdir /home/evaluation/collected-anti-patterns/ReactionReturnsPromise
 RUN mkdir /home/evaluation/collected-results
 RUN mkdir /home/evaluation/QLDBs
 RUN mkdir /home/evaluation/processed-results
