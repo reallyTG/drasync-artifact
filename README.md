@@ -231,8 +231,24 @@ cd /home/evaluation/drasync-artifact-scripts
 ```
 
 You will see an rm-related error the first time you run this; this is fine.
+There should be terminal output (many "Processing: /path/to/file"), followed by a quiet bit where dynamic invocations of anti-patterns are tallied (which has no terminal output).
+New files, ending in `.dynInv`, are generated inside the project directory, containing records of dynamic invocations of the anti-patterns.
+The anti-patterns are listed as 'patternX', an internal format recognized by our tool (we did not use verbose names here).
 
-**TODO: Finish this.**
+### Counting Occurrences (part of reproducing Table 3)
+
+For some project (e.g., Boostnote), to count all static occurrences of anti-patterns, i.e., all occurrences of anti-patterns in source code, run:
+
+```
+cd /home/evaluation/drasync-artifact-scripts
+./count-all-static-occurrences-for-proj.sh Boostnote
+```
+
+To count dynamic occurrences, i.e., how many runtime promises were genererated by anti-pattern code, you must first move the 
+
+```
+cd /home/evaluation/drasync-artifact-scripts
+```
 
 # More Instructions?
 
