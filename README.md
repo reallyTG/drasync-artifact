@@ -2,6 +2,11 @@
 
 If you're building this locally, make sure to `chmod 777 setupCodeQL.sh` otherwise Docker can't run it.
 
+# TODO
+  
+- make sure stats query is where it needs to be.
+
+
 # drasync-artifact
 
 Artifact for DrAsync, a tool to detect and visualize anti-patterns related to programming with JavaScript's async features.
@@ -218,11 +223,16 @@ This should yield multiple results-XYZ.json files (you can `ls` in `/home/evalua
 ### Processing Dynamic Analysis Results
 
 Once the results-XYZ.json files have been generated, they must be processed together with the _processed query results_, so make sure you have run that step first.
-The command to process the results of the dynamic analysis is:
+The command to process the results of the dynamic analysis is, e.g., for Boostnote:
 
 ```
-TODO
+cd /home/evaluation/drasync-artifact-scripts
+./process-results-incl-tally.sh Boostnote
 ```
+
+You will see an rm-related error the first time you run this; this is fine.
+
+**TODO: Finish this.**
 
 # More Instructions?
 
@@ -231,12 +241,4 @@ TODO
 3. Run the vis in the container: `cd /drasync/p5-promise-vis; python3 -m http.server 8080`
 4. Access vis: navigate to localhost:8080 on your machine!
 
-# TODO
-
-- figure out, in docker run step, which port is on the local machine. Specify that users can map to that port.
-  
-- install CodeQL on the image.
-  
-- make sure stats query is where it needs to be.
-  
-- add directory structure to Dockerfile.
+ 
