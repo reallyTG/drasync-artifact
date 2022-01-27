@@ -18,6 +18,9 @@ RUN git clone https://github.com/reallyTG/p5-promise-viz.git
 
 # Fetch source code for analysis output processing.
 RUN git clone https://github.com/reallyTG/ProfilingPromisesProcessing.git
+WORKDIR /home/drasync/ProfilingPromisesProcessing
+RUN npm i
+WORKDIR /home/drasync
 
 # Fetch source code for analysis.
 RUN git clone https://github.com/reallyTG/ProfilingPromisesAnalysis.git
