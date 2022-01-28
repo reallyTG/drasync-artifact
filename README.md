@@ -354,7 +354,25 @@ For convenience, please used the experiment runner script as before:
 ```
 
 Feel free to Ctrl-C and kill the experiment early (it is configured to run 50 times), every full test execution should call the refactored code a few times. 
-The times will be available in `strapi_after.log`
+The times will be available in `strapi_after.log`, i.e., run `ag 'chained call time' strapi_after.log`.
+
+To change to the original code, comment line 206 and uncomment lines 201-205 in `file`.
+For convenience, run this in docker (JavaScript supports block comments with `/* this is a (multiline, if you want) comment */`, and single-line comments with `// this is a comment`):
+
+```
+vim +200 packages/strapi-admin/services/permission/engine.js
+```
+
+Then, run the experiment for the original code (hence, 'before', as in 'before refactoring') with:
+
+```
+./run_experiment_before.sh
+```
+
+As before, times can be obtained with `ag 'chained call time' strapi_before.log`.
+
+#### Full Test Suite Refactorings
+
 
 
 # More Instructions?
