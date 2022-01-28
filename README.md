@@ -189,7 +189,7 @@ To run the test suites of each of the projects, simply run the following command
 - browsertime: test: `npm run test:unit`
 - CodeceptJS: test: `npm run test`
 - dash.js: test: `npm run test`
-- eleventy: test: `npm run test`
+- eleventy: (build: `npm i`) test: `npm run test`
 - erpjs: test: `npm run test`
 - fastify: test: `npm run unit`
 - flowcrypt-browser: test: `npm run test_buf`, `npm run test_async_stack`, `npm run test_patterns`
@@ -199,12 +199,14 @@ To run the test suites of each of the projects, simply run the following command
 - openapi-typescript-codegen: test: `npm run test`
 - rmrk-tools: test: `npm run test`
 - stencil: test: `npm run test`
-- strapi: test: `npm run test:unit`
+- strapi: (build: `yarn install`) test: `npm run test:unit`
 - treeherder: test: `npm run test`
 - ui5-builder: test: `npm run unit`
 - vscode-js-debug: test: `npm run test:unit`
 - vuepress: (build: `yarn install`, `yarn build`) test: `yarn test`
 
+If build instructions are not listed, probably either `npm i` or `yarn install` will work.
+If the package.json includes a reference to a build command, run that too.
 Some packages have (very few) failing tests, and that's OK. (E.g., Boostnote has one failing test.)
 
 The result of running the test suites is a **set of results-XYZ.json** files, which are collections of promise objects seen; each corresponds to an independent invocation of `node`, and many files simply means that many separate node instances were invoked, e.g., if the test suite is parallelized.
@@ -373,7 +375,24 @@ As before, times can be obtained with `ag 'chained call time' strapi_before.log`
 
 #### Full Test Suite Refactorings
 
+We refactored all anti-pattern instances in two projects (eleventy and vuepress) and timed their test suites.
+In either case, the process for running this experiment is the same, and an example with eleventy is given:
 
+```
+cd /home/evaluation/case-studies/eleventy
+git checkout drasync-all-refactor
+./run_experiment.sh
+```
+
+This should yield test suite run times on the command line.
+To run the experiment with no refactorings:
+
+```
+git checkout dr-async-no-refactor
+./run_experiment
+```
+
+No meaningful differences in test suite execution times are expected.
 
 # More Instructions?
 
