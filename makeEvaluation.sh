@@ -141,3 +141,6 @@ git clone https://github.com/ProfilingPromisesBenchmarks/vuepress.git
 cd /home/evaluation/case-studies/vuepress
 git checkout dr-async-artifact
 cd /home/evaluation/case-studies
+
+cd /home
+rm makeEvaluation.sh
