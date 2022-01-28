@@ -346,7 +346,15 @@ yarn install
 (This installation takes a while.)
 
 As with the previous example, the branch of strapi in this directory is our experiment branch.
+The code snippet in question has already been refactored, and the profiling calls have been inserted, so you should only have to run the test suite to see timing information.
+For convenience, please used the experiment runner script as before:
 
+```
+./run_experiment_after.sh
+```
+
+Feel free to Ctrl-C and kill the experiment early (it is configured to run 50 times), every full test execution should call the refactored code a few times. 
+The times will be available in `strapi_after.log`
 
 
 # More Instructions?
