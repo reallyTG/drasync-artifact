@@ -389,7 +389,7 @@ To run the experiment with no refactorings:
 
 ```
 git checkout dr-async-no-refactor
-./run_experiment
+./run_experiment.sh
 ```
 
 No meaningful differences in test suite execution times are expected.
