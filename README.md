@@ -282,7 +282,71 @@ I.e., 7 code locations contributed 14 runtime promises.
 
 This is aimed at reproducing our case study for RQ3.
 
-TODO This.
+#### appcenter-cli/cpDir
+
+In this experiment, we show one instance of refactoring the await-in-a-loop(-over-an-array) anti-pattern to a loop that collects promises and ends on a Promise.all; this refactoring improves performance.
+In the paper, we preformed the experiment on a very large directory (in terms of GB), and here we will instead minimize the experiment so that it is more manageable.
+To perform this experiment, simply do the following:
+
+```
+cd /home/evaluation/performance-case-studies/AwaitInLoopPerformanceBenchmark
+./setupExperiment.sh (this populates the tstCpDir directory with 50 empty files to copy)
+./runExperiment-awaitInLoop.sh
+./runExperiment-refactored.sh
+```
+
+The experiment scripts run 50 times, with a 2s sleep between runs. 
+We took an average over the 50 runs to report in the paper, along with the standard deviation.
+
+#### vuepress/apply
+
+In this experiment, we conduct a focused experiment to determine the performance benefit of a refactoring in vuepress' apply method.
+To conduct this experiment, we ran the test suite of vuepress 50 times before and after the refactoring, and collected performance numbers. 
+The version of vuepress in `/home/evaluation/performance-case-studies/vuepress` should already be on our `drasync-apply-experiment` branch, which has convenience scripts to run the experiments. 
+
+First, setup the project:
+
+```
+cd /home/evaluation/performance-case-studies/vuepress
+yarn install
+yarn build
+```
+
+This branch has the refactored version of the file available by default.
+This, to run the experiment:
+
+```
+./run_experiment_after.sh
+```
+
+You should see some test output, and the timings are redirected to `vuepress_apply_after.log`.
+To get the times, run `ag 'loop in apply' vuepress_apply_after.log` (we did this and moved the timings to a spreadsheet to average + compute standard deviation).
+
+Then, swap to the original version, and run the tests again:
+
+```
+./swapToOrig.sh
+./run_experiment_before.sh
+```
+
+(Note: if you get a permission error running `swapToOrig.sh` or `swapToRefactor.sh`, simply run `chmod +x <either-one-of-them>`.)
+
+Times can be seen via `ag 'loop in apply' vuepress_apply_before.log`.
+
+#### strapi/evaluate
+
+The process is similar to the above.
+First, build the project:
+
+```
+cd /home/evaluation/performance-case-studies/strapi
+yarn install
+```
+
+(This installation takes a while.)
+
+As with the previous example, the branch of strapi in this directory is our experiment branch.
+
 
 # More Instructions?
 
