@@ -49,6 +49,7 @@ RUN git clone https://github.com/reallyTG/ProfilingPromisesQueries.git
 # ----> /QLDBs
 # ----> /processed-results
 # ----> /proj-stats
+# ----> /performance-case-studies
 
 RUN mkdir -p /home/evaluation/case-studies
 WORKDIR /home/evaluation
@@ -68,6 +69,25 @@ RUN mkdir /home/evaluation/collected-results
 RUN mkdir /home/evaluation/QLDBs
 RUN mkdir /home/evaluation/processed-results
 RUN mkdir /home/evaluation/proj-stats
+
+# Set up performance case studies.
+RUN mkdir /home/evaluation/performance-case-studies
+WORKDIR /home/evaluation/performance-case-studies
+
+# Grab the cpDir experiment
+RUN git clone https://github.com/reallyTG/AwaitInLoopPerformanceBenchmark.git
+WORKDIR /home/evaluation/performance-case-studies/AwaitInLoopPerformanceBenchmark
+RUN npm i
+
+WORKDIR /home/evaluation/performance-case-studies
+RUN git clone https://github.com/ProfilingPromisesBenchmarks/strapi.git
+WORKDIR /home/evaluation/performance-case-studies/strapi
+RUN git checkout drasync-evaluate-experiment
+
+WORKDIR /home/evaluation/performance-case-studies
+RUN git clone https://github.com/ProfilingPromisesBenchmarks/vuepress.git
+WORKDIR /home/evaluation/performance-case-studies/vuepress
+RUN git checkout drasync-apply-experiment
 
 # Clone all evaluation projects.
 # Also, make sure they are on the `dr-async-artifact` branch.
