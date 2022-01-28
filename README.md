@@ -347,7 +347,7 @@ yarn install
 
 As with the previous example, the branch of strapi in this directory is our experiment branch.
 
-TODO: finish this part!
+
 
 # More Instructions?
 
