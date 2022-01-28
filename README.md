@@ -244,11 +244,45 @@ cd /home/evaluation/drasync-artifact-scripts
 ./count-all-static-occurrences-for-proj.sh Boostnote
 ```
 
-To count dynamic occurrences, i.e., how many runtime promises were genererated by anti-pattern code, you must first move the 
+Before counting dynamic occurrences, some files need to be combined and moved around.
+This is achieved by executing:
 
 ```
 cd /home/evaluation/drasync-artifact-scripts
+./mv-all-antipattern-tallies-for-proj.sh Boostnote
 ```
+
+Finally, to count dynamic occurrences, i.e., how many runtime promises were genererated by anti-pattern code, please run:
+
+```
+cd /home/evaluation/drasync-artifact-scripts
+./count-all-dynamic-occurrences-for-proj.sh Boostnote
+```
+
+You may not see the exact same numbers as the paper, but things should be reasonably close.
+When preparing the artifact, we obtained this output:
+
+```
+cd /home/evaluation/drasync-artifact-scripts
+./count-all-dynamic-occurrences-for-proj.sh Boostnote
+Boostnote AsyncFunctionNoAwait 0 
+Boostnote AwaitInLoop 0 
+Boostnote AwaitedReturnInAsyncFun 0 
+Boostnote ExplicitPromiseConstructor 7 14
+Boostnote InHousePromisification 11 18
+Boostnote PromiseResolveThen 2 7
+Boostnote ReactionReturnsPromise 0 
+Boostnote PromiseConstructorSyncResolve 4 4
+```
+
+E.g., line `Boostnote ExplicitPromiseConstructor 7 14` reads: in Boostnote, 7 static instances of the ExplicitPromiseConstructor anti-pattern had dynamic promises originating from them, and there were a total of 14 runtime promises associated with the anti-pattern.
+I.e., 7 code locations contributed 14 runtime promises.
+
+### Observing the Performance Benefits of Selected Refatorings
+
+This is aimed at reproducing our case study for RQ3.
+
+TODO This.
 
 # More Instructions?
 
