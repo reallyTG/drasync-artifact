@@ -3,7 +3,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # Fetch prerequisites.
 RUN apt-get update \
-	&& apt-get -y install --no-install-recommends git unzip vim curl nodejs npm parallel
+	&& apt-get -y install --no-install-recommends git unzip vim curl nodejs npm parallel silversearcher-ag
 
 RUN apt update
 
