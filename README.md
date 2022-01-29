@@ -1,11 +1,6 @@
 # NOTE
 
-If you're building this locally, make sure to `chmod 777 setupCodeQL.sh` otherwise Docker can't run it.
-
-# TODO
-  
-- make sure stats query is where it needs to be.
-
+If you're building this locally, make sure to `chmod +x setupCodeQL.sh makeEvaluation.sh` otherwise Docker can't run it.
 
 # drasync-artifact
 
@@ -54,21 +49,23 @@ When running the visualization from inside docker, you should use `python3 -m ht
 --> /codeql-home
 ```
 
-# Kick-the-Tires, or How to Make Sure the Artifact is Up and Running
-
-# Correspondence Between Paper and Artifact
+# Artifact Description and Example Commands
 
 This artifact contains all of the source code for our tool, clones of the projects we used in our evaluation at the specific commits we used to perform the evaluation, and all infrastructure required to run our evaluation.
-We will first spell out explicit correspondence between relevant figures and snippets in the paper to their equivalents in the artifact, and then we will describe how to run our evaluation in full.
+Running the full evaluation is not recommended, as we ran it on a hefty server and it will comfortably fit on a consumer-grade computer.
+Instead, we hope that this description of each of the features of the artifact is satisfactory.
+Performing the steps outlined below should yield similar results to those reported in the paper (modulo non-determinism in test suites).
+
+Running the interactive visualization is described separately, after all other steps.
 
 ## Mapping the Paper to the Artifact
-
 
 ### Queries
 
 The code corresponding to the anti-patterns described in Fig. 3 of the paper can be found in `/home/drasync/ProfilingPromisesQueries/`.
 The files corresponding to each anti-pattern are:
 ```
+<query-name>.ql                 ~ anti-pattern from paper
 findAsyncFunctionNoAwait.ql     ~ asyncFunctionNoAwait
 findAwaitReturnInAsync.ql       ~ asyncFunctionAwaitedReturn
 findAwaitInLoop.ql              ~ loopOverArrayWithAwait
@@ -78,17 +75,6 @@ findReactionReturningPromise.ql ~ reactionReturnsPromise
 findInHousePromisification.ql   ~ customPromisification
 findExplicitConstructor.ql      ~ explicitPromiseConstructor
 ```
-
-### Interactive Visualization
-
-The visualization can be run with the following command:
-
-```
-cd /home/drasync/p5-promise-vis
-python3 -m http.server 8080
-```
-
-TODO: The vis needs to be more usable. Unclear how we get it to load a file ATM.
 
 ### Code Locations of Code Snippets in Paper
 
@@ -145,8 +131,10 @@ Once created, queries can be run over the database.
 To run a query, use this script (the terminal will be pretty quiet executing this script):
 ```
 cd /home/evaluation/drasync-artifact-scripts
-./run-query.sh Boostnote 
+./run-query.sh Boostnote <query-name-from-above>
 ```
+
+(Run `./run-all-queries-for-proj.sh Boostnote` to run all available queries for a project. This may take a few minutes.)
 
 The results are always stored in `/home/evaluation/query-results/<query-name>/<project-name>` (e.g., in this case, `cat /home/evaluation/query-results/findAsyncFunctionNoAwait/Boostnote.csv` will show you the query results).
 
@@ -154,10 +142,10 @@ For this particular combination of query and project, the results of running the
 
 ```
 "col0"
-"pattern10 492 14 494 7 /home/evaluation/case-studies/Boostnote/lib/main-menu.js"
+"asyncFunctionNoAwait 492 14 494 7 /home/evaluation/case-studies/Boostnote/lib/main-menu.js"
 ```
 
-You can ignore the `"col0"` header; the following line can be read as: "pattern10 (aka, the _asyncFunctionNoAwait_ pattern) occurs from lines 492 to 494 and columns 14 to 7 resp. in file `/home/evaluation/case-studies/Boostnote/lib/main-menu.js`.
+You can ignore the `"col0"` header; the following line can be read as: the _asyncFunctionNoAwait_ pattern occurs from lines 492 to 494 and columns 14 to 7 resp. in file `/home/evaluation/case-studies/Boostnote/lib/main-menu.js`.
 To view the pattern in the terminal, run `vim +492 /home/evaluation/case-studies/Boostnote/lib/main-menu.js`.
 
 ### Processing Query Results
@@ -171,6 +159,7 @@ cd /home/evaluation/drasync-artifact-scripts
 ```
 
 (The first time you run this for any project, there will be an error in the terminal "rm: cannot remove ..."---this is fine).
+(Note: if you ran `run-all-queries-for-proj.sh`, it automatically consolidates the query results.)
 You can see the processed results with `cat /home/evaluation/processed-query-results/Boostnote.csv`, the file simply contains the output of running each of the queries that were run.
 
 ### Running the Dynamic Analysis
@@ -221,6 +210,7 @@ npm run test
 ```
 
 This should yield multiple results-XYZ.json files (you can `ls` in `/home/evaluation/case-studies/Boostnote` to see them).
+Note that Boostnote has one failing test.
 
 ### Processing Dynamic Analysis Results
 
@@ -246,11 +236,12 @@ cd /home/evaluation/drasync-artifact-scripts
 ./count-all-static-occurrences-for-proj.sh Boostnote
 ```
 
-Before counting dynamic occurrences, some files need to be combined and moved around.
+Before counting dynamic occurrences, some files need to be combined and moved around, and before that each anti-pattern should be tallied from the processed results.
 This is achieved by executing:
 
 ```
 cd /home/evaluation/drasync-artifact-scripts
+./consolidate-dyn-inv-for-proj.sh Boostnote
 ./mv-all-antipattern-tallies-for-proj.sh Boostnote
 ```
 
@@ -277,6 +268,7 @@ Boostnote ReactionReturnsPromise 0
 Boostnote PromiseConstructorSyncResolve 4 4
 ```
 
+You may not get the exact same output, due to some nondeterminism in the test suite.
 E.g., line `Boostnote ExplicitPromiseConstructor 7 14` reads: in Boostnote, 7 static instances of the ExplicitPromiseConstructor anti-pattern had dynamic promises originating from them, and there were a total of 14 runtime promises associated with the anti-pattern.
 I.e., 7 code locations contributed 14 runtime promises.
 
@@ -394,11 +386,17 @@ git checkout dr-async-no-refactor
 
 No meaningful differences in test suite execution times are expected.
 
-# More Instructions?
+## Running the Visualization
 
-1. Build image.
-2. Run image: `docker run -t -i -p 8080:8080 drasync`
-3. Run the vis in the container: `cd /drasync/p5-promise-vis; python3 -m http.server 8080`
-4. Access vis: navigate to localhost:8080 on your machine!
+This artifact also contains a visualization tool for depicting the results of our asynchronous profiling.
+The visualization displays the results of the `processed-results-XXXXXXXXXXXXX.json` files; for the purpose of the docker image, we ask that you copy and rename the result file you are interested in visualizing with a command like the following:
+
+```
+cp /home/evaluation/case-studies/Boostnote/processed-results-XXXXXXXXXXXXX.json /home/drasync/p5-promise-viz/processed-result-to-visualize.json
+```
+
+Then, you can run the vis in the container with `cd /drasync/p5-promise-vis; python3 -m http.server 8080`.
+You should be able to navigate to `localhost:8080` in your browser of choice (on your own local machine) to view the vis!
+(Note: of course, that is unless you had to specify different ports earlier when running the docker image.)
 
  
