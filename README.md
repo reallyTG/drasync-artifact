@@ -46,6 +46,7 @@ When running the visualization from inside docker, you should use `python3 -m ht
 ----> /QLDBs
 ----> /processed-results
 ----> /proj-stats
+----> /performance-case-studies
 --> /codeql-home
 ```
 
