@@ -387,6 +387,30 @@ git checkout dr-async-no-refactor
 
 No meaningful differences in test suite execution times are expected.
 
+#### Timing the Various Tool Components
+
+First of all, note that query run times are already included as part of the supplemental material of the paper.
+Nevertheless, one can time the various components of _DrAsync_ as follows:
+
+1. **Timing Queries**: navigate to the scripts directory (`cd /home/evaluation/drasync-artifact-scripts`), and run the performance script (e.g., `./time-all-queries-for-proj.sh Boostnote`);
+2. **Timing QLDB Build**: from the same scripts directory, run `time ./make-database.sh Boostnote`. Note that you should delete the QLDB corresponding to the project before running this, as CodeQL will not create a database if one already exists;
+3. **Timing the Overhead of DrAsync's Analysis**: for this, we ask that you `time` running the test command in two branches.
+First:
+
+```
+cd /home/evaluation/case-studies/Boostnote
+time npm run test
+```
+
+Then, you can switch to a branch with profiling disabled, and test again:
+
+```
+git checkout master (or git checkout main)
+time npm run test
+```
+
+Exact performance numbers will vary greatly, so we don't expect these numbers to match up with those in the paper. 
+
 ## Running the Visualization
 
 This artifact also contains a visualization tool for depicting the results of our asynchronous profiling.
