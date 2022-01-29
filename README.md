@@ -8,11 +8,15 @@ Artifact for DrAsync, a tool to detect and visualize anti-patterns related to pr
 
 # Building the Image Locally
 
+You can build this artifact by doing the following:
+
 ```
 git clone <this repo>
 cd drasync-artifact
 docker build -t drasync .
 ```
+
+**If you are coming from Zenodo**: instead, simply navigate into the drasync-artifact directory, and run `docker build -t drasync .`. 
 
 # Running the Image
 
