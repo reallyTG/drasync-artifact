@@ -61,6 +61,8 @@ Running the interactive visualization is described separately, after all other s
 
 ## Mapping the Paper to the Artifact
 
+Detailed depictions of all case studies, and performance numbers are included already in the supplemental material of the paper.
+
 ### Queries
 
 The code corresponding to the anti-patterns described in Fig. 3 of the paper can be found in `/home/drasync/ProfilingPromisesQueries/`.
@@ -103,7 +105,7 @@ The various case snippets shown in the case study can be found at the following 
 - [lines 892-894] ~ `vim +37 /home/evaluation/case-studies/vuepress/packages/@vuepress/core/lib/node/plugin-api/override/EnhanceAppFilesOption.js`
 - [lines 903-908] ~ `vim +198 /home/evaluation/case-studies/strapi/packages/strapi-admin/services/permission/engine.js `
 
-## Running the Evaluation
+## What's in the Docker Image?
 
 In this section, we will describe how to run the different components for the evaluation.
 First, we begin by describing how to run our tool on a particular project.
