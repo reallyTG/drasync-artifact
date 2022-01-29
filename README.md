@@ -430,4 +430,8 @@ Then, you can run the vis in the container with `cd /drasync/p5-promise-vis; pyt
 You should be able to navigate to `localhost:8080` in your browser of choice (on your own local machine) to view the vis!
 (Note: of course, that is unless you had to specify different ports earlier when running the docker image.)
 
- 
+## Running DrAsync on a New Project
+
+Running DrAsync on a new project (i.e., one that we haven't analyzed in our evaluation) should be relatively straightforward in this software artifact.
+If the project is cloned into `/home/evaluation/case-studies`, any of the above commands should work on it. 
+The main challenge would be figuring out how to import the analysis into the project in question; (1) if instrumenting a test suite is of interest, simply figure out how to have a test runner require a file and add that to the test command (this artifact covers instances of `jest`, `ava`, `tap`, and custom JavaScript test runners), or (2) if running directly on some code is of interest, simply add `require('/home/drasync/ProfilingPromisesAnalysis/asyncHooks_require.js')` to the top of any JavaScript or TypeScript file. 
