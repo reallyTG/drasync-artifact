@@ -165,7 +165,7 @@ cd /home/evaluation/drasync-artifact-scripts
 ./consolidate-query-results.sh Boostnote
 ```
 
-(The first time you run this for any project, there will be an error in the terminal "rm: cannot remove ..."---this is fine).
+(The first time you run this for any project, there will be an error in the terminal "rm: cannot remove ..."---this is fine.)
 (Note: if you ran `run-all-queries-for-proj.sh`, it automatically consolidates the query results.)
 You can see the processed results with `cat /home/evaluation/processed-query-results/Boostnote.csv`, the file simply contains the output of running each of the queries that were run.
 
