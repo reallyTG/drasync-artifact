@@ -426,7 +426,7 @@ The visualization displays the results of the `processed-results-XXXXXXXXXXXXX.j
 cp /home/evaluation/case-studies/Boostnote/processed-results-XXXXXXXXXXXXX.json /home/drasync/p5-promise-viz/processed-result-to-visualize.json
 ```
 
-Then, you can run the vis in the container with `cd /drasync/p5-promise-vis; python3 -m http.server 8080`.
+Then, you can run the vis in the container with `cd /home/drasync/p5-promise-vis; python3 -m http.server 8080`.
 You should be able to navigate to `localhost:8080` in your browser of choice (on your own local machine) to view the vis!
 (Note: of course, that is unless you had to specify different ports earlier when running the docker image.)
 
